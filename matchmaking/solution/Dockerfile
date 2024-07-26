@@ -1,12 +1,21 @@
-FROM python:3.12.1-alpine3.19
+FROM ubuntu:22.04
+
+# Install build tools and libraries
+RUN apt-get update && apt-get install -y \
+    cmake \
+    g++ \
+    git \
+    libssl-dev
 
 WORKDIR /solution
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-
 COPY . .
 
-ENV SERVER_PORT=8080
+# Build
+RUN mkdir -p build && cd build && \
+    cmake .. && \
+    cmake --build .
 
-CMD ["sh", "-c", "exec python3 app.py"]
+EXPOSE 8080
+
+CMD ["./build/Solution"]
