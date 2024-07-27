@@ -10,6 +10,8 @@ add_executable(
     main.cc
     user.cc
     uuid_generator.cc
+    solver.cc
+    request_manager.cc
 )
 
 # C++ Requests integration
@@ -24,9 +26,11 @@ FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download
 FetchContent_MakeAvailable(json)
 target_link_libraries(Solution PRIVATE nlohmann_json::nlohmann_json)
 
-option(BUILD_TESTS "Build unit tests. Run with ctest" OFF)
+option(BUILD_LOCAL "Build unit tests. Run with ctest. Change URL" OFF)
 
-if(BUILD_TESTS)
+if(BUILD_LOCAL)
+    target_compile_definitions(Solution PRIVATE "BUILD_LOCAL")
+
     # GoogleTest integration
     FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip)
     FetchContent_MakeAvailable(googletest)
@@ -45,6 +49,10 @@ if(BUILD_TESTS)
         team_test.cc
 
         match_test.cc
+
+        solver_test.cc
+        solver.cc
+        uuid_generator.cc
     )
 
     target_link_libraries(
