@@ -21,7 +21,7 @@ void RequestManager::Manage() {
         json data = SendGET();
         std::vector<User> new_users;
         data.get_to(new_users);
-        std::cerr << "Users from GET request: " << new_users.size() << '\n';
+        // std::cerr << "Users from GET request: " << new_users.size() << '\n';
 
         // Use an algorithm to distribute users and organise matches
         solver_->AddUsers(data);
@@ -29,7 +29,7 @@ void RequestManager::Manage() {
         data = new_matches;
 
         // Send matches to the server
-        std::cerr << "Matches created: " << new_matches.size() << '\n';
+        // std::cerr << "Matches created: " << new_matches.size() << '\n';
         data = SendPOST(data, is_last_epoch);
 
         if(is_last_epoch)

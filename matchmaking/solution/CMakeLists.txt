@@ -14,6 +14,7 @@ add_executable(
     request_manager.cc
     functions.cc
     solver_roles_greedy.cc
+    solver_mmr_greedy.cc
 )
 
 # C++ Requests integration
