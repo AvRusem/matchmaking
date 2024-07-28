@@ -19,6 +19,7 @@ namespace team {
         {Side::kRed, "red"},
         {Side::kError, "error"}
     }) 
+    
 } // namespace Team
 
 
