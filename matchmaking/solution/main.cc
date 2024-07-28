@@ -2,6 +2,7 @@
 #include <string>
 
 #include "request_manager.h"
+#include "solver_mmr_greedy.h"
 #include "solver_roles_greedy.h"
 #include "solver.h"
 
