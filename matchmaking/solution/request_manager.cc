@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "match.h"
-#include "solver_roles_greedy.h"
 #include "solver.h"
 #include "user.h"
 
@@ -20,10 +19,9 @@ void RequestManager::Manage() {
     while(true) {
         // Get users from current epoch
         json data = SendGET();
-        //std::cout << data.dump(4) << '\n';
         std::vector<User> new_users;
         data.get_to(new_users);
-        std::cerr << new_users.size() << '\n';
+        std::cerr << "Users from GET request: " << new_users.size() << '\n';
 
         // Use an algorithm to distribute users and organise matches
         solver_->AddUsers(data);
@@ -31,7 +29,7 @@ void RequestManager::Manage() {
         data = new_matches;
 
         // Send matches to the server
-        std::cerr << new_matches.size() << '\n';
+        std::cerr << "Matches created: " << new_matches.size() << '\n';
         data = SendPOST(data, is_last_epoch);
 
         if(is_last_epoch)
