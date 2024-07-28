@@ -29,7 +29,7 @@ std::vector<Match> RolesGreedySolver::Solve(bool is_last) {
                   });
     }
 
-    for(int ui = 1; ui < users_with_role[0].size(); ui++) {
+    for(int ui = 1; ui < users_with_role[0].size(); ui += 2) {
         Match match;
         match.match_id = uuid::Generate();
 
