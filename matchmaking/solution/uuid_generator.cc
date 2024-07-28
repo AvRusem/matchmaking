@@ -31,4 +31,5 @@ namespace uuid {
         };
         return ss.str();
     }
+    
 } // namespace uuid

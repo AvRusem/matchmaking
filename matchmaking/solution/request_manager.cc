@@ -5,23 +5,38 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
+#include "match.h"
 #include "solver.h"
+#include "user.h"
 
 using json = nlohmann::json;
 
 void RequestManager::Manage() {
     bool is_last_epoch = false;
+
     while(true) {
-        json data;
-        json j = SendPOST(data, is_last_epoch);
+        // Get users from current epoch
+        json data = SendGET();
+        std::vector<User> new_users;
+        data.get_to(new_users);
+        std::cerr << "Users from GET request: " << new_users.size() << '\n';
+
+        // Use an algorithm to distribute users and organise matches
+        solver_->AddUsers(data);
+        std::vector<Match> new_matches = (*solver_)(is_last_epoch);
+        data = new_matches;
+
+        // Send matches to the server
+        std::cerr << "Matches created: " << new_matches.size() << '\n';
+        data = SendPOST(data, is_last_epoch);
 
         if(is_last_epoch)
             break;
 
-        j.at("new_epoch").get_to(epoch_);
-        j.at("is_last_epoch").get_to(is_last_epoch);
-        std::cout << epoch_ << '\n';
+        data.at("new_epoch").get_to(epoch_);
+        data.at("is_last_epoch").get_to(is_last_epoch);
     }
 }
 

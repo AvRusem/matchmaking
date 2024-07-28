@@ -11,6 +11,8 @@
 #include "uuid_generator.h"
 
 TEST(SolverTest, Algorithm) {
+    std::cout << "LOL\n";
+
     User user{"", 0, {Role::kBot, Role::kJungle}, 100};
 
     std::vector<User> to_add(11);

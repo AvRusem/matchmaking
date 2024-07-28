@@ -12,6 +12,8 @@ add_executable(
     uuid_generator.cc
     solver.cc
     request_manager.cc
+    functions.cc
+    solver_roles_greedy.cc
 )
 
 # C++ Requests integration
@@ -53,6 +55,9 @@ if(BUILD_LOCAL)
         solver_test.cc
         solver.cc
         uuid_generator.cc
+
+        functions_test.cc
+        functions.cc
     )
 
     target_link_libraries(
