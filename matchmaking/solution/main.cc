@@ -6,9 +6,8 @@
 #include "solver_roles_greedy.h"
 #include "solver.h"
 
-// При локальном запуске http://server:8000 --> http://0.0.0.0:8000
 int main(int argc, char** argv) {
-    const int kTestAmount = 20;
+    const int kTestAmount = 3;
 
     for(int test = 0; test < kTestAmount; test++) {
         RequestManager rm("test_" + std::to_string(test), "00000000-0000-0000-0000-000000000000", std::make_unique<RolesGreedySolver>());

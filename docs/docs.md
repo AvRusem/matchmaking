@@ -1,23 +1,23 @@
 # GET /matchmaking/users
 
-### Входные параметры
+### Input parameters
 
-Пример:
+Example:
 
 ```
 /matchmaking/users?test_name=test_0&epoch=00000000-0000-0000-0000-000000000000
 ```
 
-- `test_name` - имя теста, их можно найти в папке `/server/tests`.
-  - Всего вам нужно вызвать 20 тестов, начиная
-    с `test_0` и заканчивая `test_19`.
-- `epoch` - uuid эпохи в тестирующей системе. Между эпохами может проходить любое время, от нескольких секунд, до
-  нескольких часов.
-  - первый запрос в рамках каждого теста на `/matchmaking/match` должен быть с `epoch=00000000-0000-0000-0000-000000000000`
+- `test_name` - test name, they can be found in the `/server/tests` folder.
+  - In total you need to call 20 tests, starting
+    starting with `test_0` and ending with `test_19`.
+- `epoch` - uuid of the epoch in the testing system. Any amount of time can pass between epochs, from a few seconds to
+  several hours.
+  - the first request within each test for `/matchmaking/match` must be with `epoch=00000000-0000-0000-0000-0000000000000`
 
-### Ответ
+### Response
 
-Пример:
+Example:
 
 ```json
 [
@@ -31,18 +31,18 @@
 ]
 ```
 
-- `user_id` - uuid пользователя
-- `mmr` - рейтинг пользователя
-- `roles` - отранжированный по приоритету список позиций
-- `waitingTime` - время ожидания в очереди, в секундах
+- `user_id` - user uuid
+- `mmr` - user rating
+- `roles` - list of positions sorted by priority
+- `waitingTime` - waiting time in queue, in seconds
 
-Вам в ответ может придти любое количество пользователей, но не более 10^4
+Any number of users can respond to you, but no more than 10^4
 
 # POST matchmaking/match
 
-### Входные параметры
+### Input parameters
 
-Пример:
+Example:
 
 ```/matchmaking/match?test_name=test_0&epoch=00000000-0000-0000-0000-000000000000```
 
@@ -76,16 +76,16 @@
   ...
 ]
 ```
-- `match_id` - uuid матча
-- `teams` - составы команд
-  - `side` - сторона команды `(red/blue)`
-  - `users` - список игроков команды
-    - `id` - uuid пользователя
-    - `role` - позиция игрока, которую он занимает в матче
+- `match_id` - match uuid
+- `teams` - team roster
+  - `side` - team side `(red/blue)`
+  - `users` - list of players
+    - `id` - user uuid
+    - `role` - player position in the game
 
 
 
-### Ответ
+### Response
 
 ```json
 {
@@ -93,5 +93,5 @@
   "is_last_epoch": true
 }
 ```
-- `new_epoch` - uuid эпохи, который нужно использовать в следующих запросах
-- `is_last_epoch` - флаг, которы показывает, последняя ли это эпоха
+- `new_epoch` - uuid of the epoch to be used in the following requests
+- `is_last_epoch` - a flag that shows whether this is the last era
