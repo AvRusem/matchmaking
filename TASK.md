@@ -1,8 +1,5 @@
 # Description
 
-Представь, что ты разработчик игры, в которой сталкиваются две команды из пяти игроков. Каждая команда состоит из пяти
-ролей: верхняя (top), средняя (mid), нижняя (bot), поддержка (sup), лес (jungle).
-
 Imagine that you are the developer of a game in which two teams of five players participate. each consists of five teams
 roles: top (top), middle (mid), bottom (bot), support (sup), jungle (jungle).
 
